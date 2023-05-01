@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-12 mb-5">
+        <h1 class="text-center">Mentors</h1>
+        </div>
+    </div>
+
+    {% if 'mentor_list' %}
+    <div class="col-12">
+        <div class="container">
+            <div class="row">
+                {% for mentor in mentor_list %}
+                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    <div class="mentor-card my-3 mx-auto">
+                        <a href="{% url 'home:profile' mentor.user_id.pk %}">
+                            <div class="container mentor-image py-4 px-3">
+                                <img src="{{ mentor.userpic }}" alt="mentor image" width="200" height="280">
+                            </div>
+                        </a>
+                        <div class="container mentor-info ms-0 ps-1">
+                            <a class="text-decoration-none text-dark fs-5 fw-semibold" href="{% url 'home:profile' mentor.user_id.pk %}">{{ mentor.user_id }}</a>
+                            <p>{{ mentor.area_of_expertise }}</p>
+                            <a href="{% url 'messages:messages_with_path' 'conv' %}{{user.pk}}_{{mentor.user_id.pk}}?q=conv{{user.pk}}_{{mentor.user_id.pk}}" class="btn global-action-btn rounded-pill">contact mentor</a>                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:1 %}
+                    <div class="col-12 d-sm-none">
+                        <hr">
+                    </div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <div class="col-12 d-none d-sm-block d-md-block d-lg-none">
+                        <hr">
+                    </div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:3 %}
+                <div class="col-12 d-none d-lg-block d-xl-none">
+                    <hr>
+                </div>
+                {% endif %}
+                {% if forloop.counter|divisibleby:4 %}
+                    <div class="col-12 d-none d-xl-block">
+                        <hr>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <!-- pagination -->
+        {% if page_obj.has_other_pages %}
+        <nav>
+            <ul class="pagination justify-content-center mt-4 mb-2">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                        Previous
+                    </a>
+                </li>
+                {% endif %}
+
+                {% for page_number in page_obj.paginator.page_range %}
+                {% if page_number <= page_obj.number|add:3 and page_number >= page_obj.number|add:-3 %}
+                {% if page_obj.number == page_number %}
+                <li class="page-item active">
+                    <a class="page-link"
+                        href="?page={{ page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_number }}</a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                        Next
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                        Last
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+    {% else %}
+        <p>Ooops, nothing here.</p>
+    {% endif %}
+{% endblock %}

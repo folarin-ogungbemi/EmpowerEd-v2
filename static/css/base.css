@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Elsie+Swash+Caps:wght@900&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,200&display=swap');
+
+/* Table of content
+----------------------------
+1. GENERAL STYLE
+    1.1 General
+    1.2 pages
+    1.3 Navbar
+    1.3 button
+    1.5 form
+
+2. HERO STYLE
+    2.1 hero background
+    2.2 hero content
+
+3. ALL-AUTH STYLE
+    3.1 all-auth background
+
+4. MENTOR STYLE
+    4.1 mentor-card
+
+5. USER-PROFILE STYLE
+
+6. CHAT STYLE
+
+7. NOTIFICATION STYLE
+
+8. FOOTER-LINKS STYLE
+
+9. SCROLL-BAR STYLE
+
+*/
+
+
+/*  ***********
+    GENERAL STYLE
+    *********** */
+/*-----------General--------------*/
+
+:root{
+    --fs-xl: clamp(2rem, 7vw, 4rem);
+    --bg:linear-gradient(39deg, rgba(27, 255, 0, 0.34) 0%, rgba(162, 223, 157, 0.2) 28%, rgba(157, 221, 223, 0.08) 50%, rgba(0, 100, 183, 0.09) 73%, rgba(130, 136, 238, 0.4) 100%);;
+    --bg-web:-webkit-linear-gradient(39deg, rgba(27, 255, 0, 0.34) 0%, rgba(162, 223, 157, 0.2) 28%, rgba(157, 221, 223, 0.08) 50%, rgba(0, 100, 183, 0.09) 73%, rgba(130, 136, 238, 0.4) 100%);;
+    --col-pry-light:#a2df9d;
+    --col-sec: #8288ee;
+    --col-light:#fff;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* pages */
+.page{
+    margin-top: 15vh;
+    min-height: 85vh;
+}
+
+/* Navbar */
+.top-nav{
+    background-color: var(--col-light);
+    backdrop-filter: blur(20px);
+    box-shadow: 0.5px 0.5px 10px 0.5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+/* button */
+.global-action-btn{
+    background-color:var(--col-sec);
+    color: var(--col-light);
+    font-size: large;
+    width: fit-content;
+    padding: 5px 15px;
+}
+
+.hero-action-btn{
+    background-color:var(--col-sec);
+    color: var(--col-light);
+    font-weight: 500;
+    font-size: x-large;
+    width: fit-content;
+    padding: 10px 30px;
+}
+
+.global-action-btn:hover,
+.hero-action-btn:hover{
+    background-color:var(--col-pry-light) !important;
+    color: var(--col-light) !important;
+}
+
+.global-action-btn:focus,
+.hero-action-btn:focus{
+    background-color:var(--col-pry-light) !important;
+    color: var(--col-light) !important;
+}
+
+/* form */
+.asteriskField{
+    color: #dc3545;
+    padding: 0.1rem;
+}
+
+.text-empower{
+    color: var(--col-sec);
+}
+.text-empower:hover{
+    color: var(--col-pry-light);
+}
+
+/*  ***********
+    HERO STYLE
+    *********** */
+
+/* hero-background */
+#hero .background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: var(--bg);
+    background: var(--bg-web);
+}
+
+/* hero-content */
+.hero-content{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+.hero-content .head-text{
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--fs-xl);
+    font-weight: bold;
+    margin-bottom: 2.5rem;
+}
+
+/*  ***********
+    ALL-AUTH STYLE
+    *********** */
+
+/* allauth-background */
+.allauth.background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: var(--bg);
+    background: var(--bg-web);
+}
+
+.all-auth{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+.reg{
+    box-shadow: 0.5px 0.5px 3px 0.5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    width: 100%;
+    background: var(--col-light);
+}
+
+.reg-content{
+    padding: 1rem;
+}
+
+/*  ***********
+    MENTOR STYLE
+    *********** */
+/* mentor-card*/
+
+.mentor-card{
+    position: relative;
+    width: 240px;
+}
+
+.mentor-image{
+    background-color: var(--col-light);
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    width: 230px;
+    border-radius: 2px;
+}
+
+.mentor-info{
+    width: 230px;
+    margin: auto;
+}
+
+.mentor-image:hover{
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.4);
+}
+
+.mentor-card img{
+    border-radius: 5px;
+}
+
+/*  *****************
+    RESOURCE STYLE
+    *************** */
+.resource-card{
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.resource-card img{
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+/*  *****************
+    USER-PROFILE STYLE
+    *************** */
+.user-profile{
+    width: 100%;
+}
+
+.user-profile .profile > p{
+    font-size: x-large;
+    margin-block: auto;
+}
+
+.user-profile .profile > a{
+    margin-block: auto;
+}
+
+.user-profile img{
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+    max-width: 12rem;
+    max-height: 12rem;
+}
+
+.parent,
+.children,
+.pen{
+    color: var(--col-sec) !important;
+}
+
+.parent:hover,
+.children:hover,
+.pen:hover{
+    color: var(--col-pry-light) !important;
+}
+
+.sessions-student,
+.sessions-mentor{
+    text-decoration: none;
+    color: var(--col-sec);
+}
+
+.sessions-student:hover,
+.sessions-mentor:hover{
+    color: var(--col-pry-light);
+}
+
+.sessions-info{
+    box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/*  *****************
+    ABOUT STYLE
+    *************** */
+
+    #about{
+        position: relative;
+        background-image:url("/static/assets/img/about_empowered.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        margin-top: -12vh;
+        margin-bottom: 0.5vh;
+    }
+
+    .about-content{
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+    }
+
+/*  *****************
+    CHAT STYLE
+    *************** */
+/* chat */
+#js-framework-home {
+    overflow-y: scroll;
+    height: fit-content;
+ }
+
+#js-framework-home a {
+     color: #242323;
+     text-decoration: none;
+ }
+
+#js-framework-home a div div div:hover {
+     text-decoration: underline;
+ }
+
+ .sender {
+     font-style: italic;
+     font-size: 13px;
+     color: #8391a4 !important;
+ }
+
+/*  *****************
+    NOTIFICATION STYLE
+    *************** */
+/* Notifications */
+#count {
+    font-size: 10px;
+}
+
+/*  *****************
+    FOOTER-LINKS STYLE
+    *************** */
+    .footer-links{
+        min-width: 100%;
+        background: var(--col-light);
+        box-shadow: 0.5px 0.5px 5px 0.5px rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+    }
+    
+    .footer-links .nav-link:hover{
+        color: var(--col-sec);
+    }
+
+    /******************
+    PAGINATION STYLE
+    *************** **/
+    .page-link{
+        color: var(--col-sec);
+    }
+
+    .active>.page-link{
+        background-color: var(--col-sec);
+        border-color: var(--col-sec);
+    }
+
+    .active>.page-link:hover{
+        background-color: var(--col-pry-light);
+        border-color: var(--col-pry-light);
+    }
+
+/*  *****************
+    SCROLL-BAR STYLE
+    *************** */
+
+::-webkit-scrollbar{
+    width: 0.6rem;
+}
+
+::-webkit-scrollbar-track{
+    background-color: var(--col-light);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color:rgba(130, 136, 238, 0.7);
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background-color:var(--col-sec);
+}
+
+@supports (scrollbar-color: red, blue){
+    *{
+        scrollbar-color: rgba(130, 136, 238, 0.7) transparent;
+        scrollbar-width: thin;
+    }
+}
+
+/*****************
+MEDIA-QUERIES
+*************** */
+
+@media screen and (max-width: 992px)  {
+    .navbar-brand{
+        margin-left: 1rem !important;
+    }
+    .nav-internal-links{
+        justify-content: start !important;
+        margin-left: 1rem;
+    }
+    .navbar-toggler{
+        margin-right: -1rem !important;
+    }
+    .nav #messages{
+        margin: auto !important;
+    }
+}
+

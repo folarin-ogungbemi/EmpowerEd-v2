@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="signup">
+<canvas class="allauth background"></canvas>
+<div class="all-auth">
+    <div class="container mt-5 reg">
+        <div class="row">
+            <div class="col-12 reg-content">
+                <h2 class="mb-3">{% trans "Sign Up" %}</h2>
+                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form.role | as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.first_name | as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.last_name | as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            {{ form.email | as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.password1 | as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.password2 | as_crispy_field }}
+                        </div>
+                    </div>
+                    <button class="btn global-action-btn rounded-pill" type="submit">{% trans "Sign Up" %}</button>
+                </form>
+                <div class="my-3 text-center">
+                    <p>{% blocktrans %}Already have an account? Please <a  class="text-empower" href="{{ login_url }}">Sign in</a>.{% endblocktrans %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

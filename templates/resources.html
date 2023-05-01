@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12 mb-5">
+      <h1 class="text-center">Resources</h1>
+    </div>
+</div>
+
+<div class="row">
+    {% if 'resource_list' %}
+    <div class="col-8 mx-auto">
+        {% for resource in resource_list %}
+            <div class="container resource-card mb-5 p-3">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <img src="{{ resource.img }}" class="img-fluid" alt="{{ resource.name }}">
+                    </div>
+                    <div class="col-12 col-md-6 d-flex flex-column gap-2">
+                        <p class="card-title fs-5 fw-bold mt-1">{{ resource.name }}</p>
+                        <p class="card-text">{{ resource.about }}</p>
+                        <a href="{{ resource.url }}" class="btn global-action-btn rounded-pill ms-auto align-self-end">Start now</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- pagination -->
+    {% if page_obj.has_other_pages %}
+    <nav>
+        <ul class="pagination justify-content-center mt-4 mb-2">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                    Previous
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page_number in page_obj.paginator.page_range %}
+            {% if page_number <= page_obj.number|add:3 and page_number >= page_obj.number|add:-3 %}
+            {% if page_obj.number == page_number %}
+            <li class="page-item active">
+                <a class="page-link"
+                    href="?page={{ page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                    Next
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link"
+                    href="?page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
+                    Last
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+    {% else %}
+    <p>Ooops, nothing here.</p>
+    {% endif %}
+</div>
+{% endblock %}
+

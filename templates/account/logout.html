@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div class="signout">
+<canvas class="allauth background"></canvas>
+<div class="all-auth">
+    <div class="container reg">
+        <div class="row">
+            <div class="col-12 mt-3 reg-content">
+                <h2 class="mb-3">{% trans "Sign Out" %}</h2>
+                <p>{% trans 'Are you sure you want to sign out?' %}</p>
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    <button class="btn global-action-btn rounded-pill" type="submit">{% trans 'Sign Out' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
