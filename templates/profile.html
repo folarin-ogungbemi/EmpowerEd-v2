@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12 mb-5">
+        <h1 class="text-center">User Profile</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                {% if profile.user_id.role == 'Mentor' %}
+                <div class="col-10 col-md-6 mx-auto">
+                    <div class="user-profile mb-5">
+                        <img src="{{ profile.userpic }}" alt="{{ profile }} profile picture">
+                        <div class="container profile d-flex gap-2">
+                            <p class="fw-semibold mt-3">{{ profile.user_id }}</p>
+                            <!-- update icon -->
+                            {% if profile.user_id == request.user %}
+                            <a href="{% url 'home:update_profile' profile.user_id.pk %}" class="link-primary mx-2 pen"
+                                title="Edit Your Profile">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>{% endif %}
+                        </div>
+                        <a href="{% url 'messages:messages_with_path' 'conv' %}{{user.pk}}_{{profile.user_id.pk}}?q=conv{{user.pk}}_{{profile.user_id.pk}}" class="btn global-action-btn rounded-pill">contact mentor</a>
+                    </div>
+                    <p><strong>Area of Expertise:</strong> {{ profile.area_of_expertise }}</p>
+                    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+
+                </div>
+                <div class="col-12 col-md-6">
+                    <p class="fs-5">Students</p>
+                    {% for relationship in mentor_student %}
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-graduation-cap me-2"></i><a class="text-decoration-none children" href="{% url 'home:profile' relationship.student_id.user_id.pk %}">{{ relationship.student_id }}</a></li>
+                    </ul>
+                    {% endfor %}
+                </div>
+
+                {% elif profile.user_id.role == 'Student' %}
+                <div class="col-10 col-md-5 mx-auto">
+                    <div class="user-profile mb-5">
+                        <img src="{{ profile.userpic }}" alt="{{ profile }} profile picture">
+                        <div class="container profile d-flex gap-2">
+                            <p class="fw-semibold">{{ profile }}</p>
+                           {% if profile.user_id == request.user %}
+                           <a href="{% url 'home:update_profile' profile.user_id.pk %}" class="link-primary mx-2 pen"
+                               title="Edit Your Profile">
+                               <i class="fa-solid fa-pen-to-square"></i>
+                           </a>{% endif %}
+                        </div>
+                    </div>
+                    {% if student_parent %}
+                        <p>Parent: <a class="parent text-decoration-none" href="{% url 'home:profile' student_parent.user_id.pk %}">{{ student_parent }}</a></p>
+                    {% endif %}
+                    <p>Age: {{ age }}</p>
+                    <p>Interests: {{ profile.interests }}</p>
+
+                </div>
+                <div class="col-12 col-md-7">
+                    <!--other informations-->
+                    <div class="container sessions">
+                        <p class="fs-5 fw-semibold text-center text-uppercase">Upcoming Sessions</p>
+                        <div class="row">
+                            {% for lesson in lessons %}
+                            <div class="col-12">
+                                <div class="container sessions-info my-2 py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <p><i class="fa-solid fa-wand-magic-sparkles me-2"></i><a class="sessions-mentor" href="{% url 'home:profile' lesson.mentor.user_id.pk %}">{{ lesson.mentor.user_id }}</a></p>
+                                        <p class="text-muted">{{ lesson.mentor.area_of_expertise }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <small><i class="fa-solid fa-bolt me-2"></i> {{ lesson.start_time }}</small>
+                                        <small><i class="fa-solid fa-star me-2"></i> {{ lesson.end_time }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="col-12 col-md-5">
+                    <div class="user-profile mb-5">
+                        <img src="{{ profile.userpic }}" alt=" {{ profile }}profile picture">
+                        <div class="container profile d-flex gap-2">
+                            <p class="fw-semibold">{{ profile }}</p>
+                           {% if profile.user_id == request.user %}
+                           <a href="{% url 'home:profile' profile.user_id.pk %}" class="link-primary mx-2 pen"
+                               title="Edit Your Profile">
+                               <i class="fa-solid fa-pen-to-square"></i>
+                           </a>{% endif %}
+                        </div>
+                        <a href="{% url 'messages:messages_with_path' 'conv' %}{{user.pk}}_{{profile.user_id.pk}}?q=conv{{user.pk}}_{{profile.user_id.pk}}" class="btn global-action-btn rounded-pill">contact parent</a>
+                    </div>
+                    <p class="fs-5">Children</p>
+                    {% for relationship in parent_student %}
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-graduation-cap me-2"></i><a class="text-decoration-none children" href="{% url 'home:profile' relationship.user_id.pk %}">{{ relationship }}</a></li>
+                    </ul>
+                    {% endfor %}
+                    
+                </div>
+                <div class="col-12 col-md-7">
+                    <!--other informations-->
+                    
+                    <div class="container sessions">
+                        <p class="fs-5 fw-semibold text-center text-uppercase">Upcoming Sessions</p>
+                        {% if lessons is not none %}
+                        <div class="row">
+                            {% for lesson in lessons %}
+                            <div class="col-12">
+                                <div class="container sessions-info my-2 py-2">
+                                    <p><i class="fa-solid fa-graduation-cap me-2"></i><a class="sessions-student" href="{% url 'home:profile' lesson.student.user_id.pk %}">{{ lesson.student }}</a></p>
+                                    <div class="d-flex justify-content-between">
+                                        <p><i class="fa-solid fa-wand-magic-sparkles me-2"></i><a class="sessions-mentor" href="{% url 'home:profile' lesson.mentor.user_id.pk %}">{{ lesson.mentor.user_id }}</a></p>
+                                        <p class="text-muted">{{ lesson.mentor.area_of_expertise }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <small><i class="fa-solid fa-bolt me-2"></i> {{ lesson.start_time }}</small>
+                                        <small><i class="fa-solid fa-star me-2"></i> {{ lesson.end_time }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
