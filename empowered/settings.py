@@ -30,11 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = development
 
 if development:
-    ALLOWED_HOSTS = ['localhost', 
-                     '127.0.0.1',
-                     '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', 
-                     '8000-clacif-empoweredv2-dzhq2wr08zj.ws-eu96b.gitpod.io',
-                     'team4-empowered.herokuapp.com/']
+    ALLOWED_HOSTS = ['localhost', '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', 'team4-empowered.herokuapp.com/']
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
@@ -45,7 +41,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.8000-clacif-empoweredv2-dzhq2wr08zj.ws-eu96b.gitpod.io',
     'https://*.8000-wierdlygoodco-empowered-gq4xmaou0mg.ws-eu87.gitpod.io',
     'https://*.team4-empowered.herokuapp.com/'
-    ]
+]
 
 # Application definition
 
@@ -133,8 +129,8 @@ ASGI_APPLICATION = "empowered.asgi.application"
 #         }
 
 DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-        }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
