@@ -14,7 +14,7 @@ from pathlib import Path
 import dj_database_url
 if os.path.isfile("env.py"):
     import env
-development = os.environ.get('DEVELOPMENT', False)
+development = os.environ.get('DEVELOPMENT', True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +30,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = development
 
 if development:
-    ALLOWED_HOSTS = ['localhost', '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', 'team4-empowered.herokuapp.com/']
+    ALLOWED_HOSTS = ['localhost', '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io',
+                     '8000-clacif-empoweredv2-dzhq2wr08zj.ws-eu96b.gitpod.io', 'team4-empowered.herokuapp.com/']
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
@@ -38,9 +39,10 @@ else:
 CSRF_TRUSTED_ORIGINS = [
     'https://*.8000-folarinogungbemi-team4-8eh8k0g2vez.ws-eu87.gitpod.io/',
     'https://*.8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io',
+    'https://*.8000-clacif-empoweredv2-dzhq2wr08zj.ws-eu96b.gitpod.io',
     'https://*.8000-wierdlygoodco-empowered-gq4xmaou0mg.ws-eu87.gitpod.io',
     'https://*.team4-empowered.herokuapp.com/'
-    ]
+]
 
 # Application definition
 
@@ -127,8 +129,8 @@ ASGI_APPLICATION = "empowered.asgi.application"
 #         }
 
 DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-        }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
