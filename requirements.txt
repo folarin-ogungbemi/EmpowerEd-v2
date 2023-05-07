@@ -1,3 +1,4 @@
+anaconda==0.0.1.1
 asgi-redis==1.0.0
 asgiref==3.6.0
 async-timeout==4.0.2
@@ -30,6 +31,7 @@ oauthlib==3.2.2
 psycopg2==2.9.5
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
+pycodestyle==2.10.0
 PyJWT==2.6.0
 pyOpenSSL==23.0.0
 python3-openid==3.2.0

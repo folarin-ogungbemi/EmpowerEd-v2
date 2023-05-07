@@ -14,7 +14,7 @@ from pathlib import Path
 import dj_database_url
 if os.path.isfile("env.py"):
     import env
-development = os.environ.get('DEVELOPMENT', False)
+development = os.environ.get('DEVELOPMENT', True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +30,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = development
 
 if development:
-    ALLOWED_HOSTS = ['localhost', '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', 'team4-empowered.herokuapp.com/']
+    ALLOWED_HOSTS = ['localhost', 
+                     '127.0.0.1',
+                     '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', 
+                     '8000-clacif-empoweredv2-dzhq2wr08zj.ws-eu96b.gitpod.io',
+                     'team4-empowered.herokuapp.com/']
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
@@ -38,6 +42,7 @@ else:
 CSRF_TRUSTED_ORIGINS = [
     'https://*.8000-folarinogungbemi-team4-8eh8k0g2vez.ws-eu87.gitpod.io/',
     'https://*.8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io',
+    'https://*.8000-clacif-empoweredv2-dzhq2wr08zj.ws-eu96b.gitpod.io',
     'https://*.8000-wierdlygoodco-empowered-gq4xmaou0mg.ws-eu87.gitpod.io',
     'https://*.team4-empowered.herokuapp.com/'
     ]
@@ -61,6 +66,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'crispy_forms',
     'crispy_bootstrap5',
 
@@ -194,9 +200,23 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+# Settings to auth with google
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_LOGOUT_ON_GET= True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 # Websoket stuff
-
 REDIS_URL = os.environ.get('REDISCLOUD_URL')
 
 
