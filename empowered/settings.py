@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 DEBUG = development
 
 if development:
-    ALLOWED_HOSTS = ['localhost', '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', 'team4-empowered.herokuapp.com/']
+    ALLOWED_HOSTS = ['localhost', '8000-okserm-empowered-qrw26zw6fk2.ws-eu87.gitpod.io', '127.0.0.1', 'team4-empowered.herokuapp.com/']
 else:
     ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
@@ -86,7 +86,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates',),
+            os.path.join(BASE_DIR, 'frontend/build',),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -166,7 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/build/static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
